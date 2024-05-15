@@ -1,9 +1,10 @@
 import './App.css';
+import {PalaisTimeLine} from '@/components';
 
 function App() {
   return (
-    <div className='text-x1 font-bold text-opacity-40 text-red-300'>
-			hellow tailwind world
+    <div>
+      <PalaisTimeLine />
     </div>
   );
 }
