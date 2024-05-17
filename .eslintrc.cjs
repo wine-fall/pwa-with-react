@@ -21,6 +21,13 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     'object-curly-spacing': ['error', 'never'],
+    'react/jsx-max-props-per-line': [
+      'error',
+      {
+          maximum: 2,
+          when: 'always',
+      },
+  ]
   },
   parserOptions: {
     ecmaVersion: 'latest',
