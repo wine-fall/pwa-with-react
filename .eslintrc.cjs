@@ -18,7 +18,9 @@ module.exports = {
     ],
     '@typescript-eslint/indent': ['error', 2, {'SwitchCase': 1, 'ignoredNodes': ['PropertyDefinition']}],
     'semi': ['error', 'always'],
-    'react-hooks/exhaustive-deps': 'off'
+    'react-hooks/exhaustive-deps': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    'object-curly-spacing': ['error', 'never'],
   },
   parserOptions: {
     ecmaVersion: 'latest',
