@@ -2,13 +2,16 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Timeline, DataSet} from 'vis-timeline/Standalone';
 import type {TimelineOptions} from 'vis-timeline/Standalone';
 import {mockData} from '@/mock';
-import type {TimeLineProps, TimeLineProperty, TimelineData} from '@/types';
+import type {TimeLineProps, TimeLineProperty, TimelineData} from './timeline.type';
 import {useTimeLineListener} from '@/hooks';
+import {useTranslation} from 'react-i18next';
 
-const TimeLine: React.FC<TimeLineProps> = ({lang = 'zh-cn'}) => {
+const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
   const container = useRef<HTMLDivElement>(null);
   const [timeline, setTimeLine] = useState<Timeline | null>(null);
   const [data, setData] = useState<TimelineData[]>([]);
+
+  const {t} = useTranslation();
 
   useEffect(() => {
     if (!container.current) {
@@ -34,7 +37,7 @@ const TimeLine: React.FC<TimeLineProps> = ({lang = 'zh-cn'}) => {
           time: 'zh-cn'
         }
       },
-      locale: lang
+      locale: lng
     };
     timeline.setOptions(options);
     setTimeLine(timeline);
@@ -51,7 +54,13 @@ const TimeLine: React.FC<TimeLineProps> = ({lang = 'zh-cn'}) => {
   useTimeLineListener(timeline, 'select', handleSelect);
 
 
-  return <div ref={container}>hellow TimeLine</div>;
+  return (
+    <>
+      <p>{t('hello_timeline')}</p>
+      <p>{t('hello_palais')}</p>
+      <div ref={container}></div>
+    </>
+  );
 };
 
 export default TimeLine;

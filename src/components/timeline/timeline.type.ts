@@ -1,5 +1,5 @@
 export interface TimeLineProps {
-  lang: string;
+  lng?: string;
 }
   
 export interface TimeLineProperty {

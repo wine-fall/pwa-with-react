@@ -1,2 +1,2 @@
 export * from './hooks.type';
-export * from './timeline.type';
+export * from './language.type';
