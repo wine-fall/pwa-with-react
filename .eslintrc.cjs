@@ -18,6 +18,7 @@ module.exports = {
     ],
     '@typescript-eslint/indent': ['error', 2, {'SwitchCase': 1, 'ignoredNodes': ['PropertyDefinition']}],
     'semi': ['error', 'always'],
+    'react-hooks/exhaustive-deps': 'off'
   },
   parserOptions: {
     ecmaVersion: 'latest',
