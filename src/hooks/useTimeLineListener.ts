@@ -1,5 +1,6 @@
 import {useEffect, useRef} from 'react';
-import {useTimeLineListenerFn, timelineEventCb, TimeLineProperty} from '@/types';
+import {useTimeLineListenerFn, timelineEventCb} from '@/types';
+import {TimeLineProperty} from '@/components/timeline/timeline.type';
 
 export const useTimeLineListener: useTimeLineListenerFn = (timeline, event, cb) => {
   const ref = useRef<timelineEventCb>(cb);

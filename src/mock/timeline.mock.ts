@@ -1,4 +1,4 @@
-import {TimelineData} from '@/types';
+import {TimelineData} from "@/components/timeline/timeline.type";
 
 export const mockData: TimelineData[] = [
   {id: '1', content: "item 1", start: "2014-04-20"},
