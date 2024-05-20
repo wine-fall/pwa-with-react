@@ -1,5 +1,7 @@
 import {Timeline} from 'vis-timeline';
 
-export type timelineEventCb = (properties: any) => void
+export type TimelineEventType = 'select' | 'rangechanged';
 
-export type useTimeLineListenerFn = (timeline: Timeline | null, event: string, cb: timelineEventCb) => void
+export type TimelineEventCb = (properties: any) => void
+
+export type UseTimeLineListenerFn = (timeline: Timeline | null, event: TimelineEventType, cb: TimelineEventCb) => void

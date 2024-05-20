@@ -4,6 +4,9 @@ export interface TimeLineProps {
   
 export interface TimeLineProperty {
   items: string[];
+  start: number;
+  end: number;
+  byUser: boolean;
 }
 
 export interface TimelineData {

@@ -51,7 +51,17 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
     console.log('select properties is', selectItem); // todo: get the server data
   };
 
+  const handleRangeChanged = (properties: TimeLineProperty) => {
+    const {start, end, byUser} = properties;
+    console.log({
+      start,
+      end,
+      byUser
+    });
+  };
+
   useTimeLineListener(timeline, 'select', handleSelect);
+  useTimeLineListener(timeline, 'rangechanged', handleRangeChanged);
 
 
   return (
