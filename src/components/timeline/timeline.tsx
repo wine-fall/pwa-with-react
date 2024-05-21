@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Timeline, DataSet} from 'vis-timeline/Standalone';
-import type {TimelineOptions} from 'vis-timeline/Standalone';
 import {mockData} from '@/mock';
 import type {TimeLineProps, TimeLineProperty, TimelineData} from './timeline.type';
 import {useTimeLineListener} from '@/hooks';
 import {useTranslation} from 'react-i18next';
+import {createTimeLineOpts} from '@/utils';
 
 const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
   const container = useRef<HTMLDivElement>(null);
@@ -30,15 +30,7 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
     const items = new DataSet(mockData); // todo: get the server data
     setData(mockData);
     const timeline = new Timeline(container.current, items, {});
-    const options: TimelineOptions = {
-      locales: {
-        'zh-cn': {
-          current: 'zh',
-          time: 'zh-cn'
-        }
-      },
-      locale: lng
-    };
+    const options = createTimeLineOpts({locale: lng});
     timeline.setOptions(options);
     setTimeLine(timeline);
   };
