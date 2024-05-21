@@ -18,6 +18,7 @@ export const createTimeLineOpts = (input: TimelineOptions): TimelineOptions => {
     zoomFriction: 5,
     zoomMax: twentyHundredYears,
     zoomMin: oneWeek,
+    height: 400,
     ...input,
   };
 };
