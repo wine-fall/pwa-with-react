@@ -2,7 +2,7 @@ export default {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-    pxtorem: {
+    'postcss-pxtorem': {
       rootValue: 16,
       propList: ['*'],
     }
