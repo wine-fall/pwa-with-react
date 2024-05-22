@@ -1,15 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Timeline, DataSet} from 'vis-timeline/Standalone';
-import {mockData} from '@/mock';
-import type {TimeLineProps, TimeLineProperty, TimelineData} from './timeline.type';
+import {mockGroup} from '@/mock';
+import type {TimeLineProps, TimeLineProperty, TimeLineData} from './timeline.type';
 import {useTimeLineListener} from '@/hooks';
 import {useTranslation} from 'react-i18next';
-import {createTimeLineOpts} from '@/utils';
+import {createTimeLineGroup, createTimeLineOpts} from '@/utils';
 
 const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
   const container = useRef<HTMLDivElement>(null);
   const [timeline, setTimeLine] = useState<Timeline | null>(null);
-  const [data, setData] = useState<TimelineData[]>([]);
+  const [data, setData] = useState<TimeLineData[]>([]);
 
   const {t} = useTranslation();
 
@@ -27,11 +27,12 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
     if (!container.current) {
       return;
     }
-    const items = new DataSet(mockData); // todo: get the server data
-    setData(mockData);
-    const timeline = new Timeline(container.current, items, {});
+    console.log('mockGroup is', mockGroup);
+    const {groups, items} = createTimeLineGroup(mockGroup);
+    const timelineItems = new DataSet(items); // todo: get the server data
+    setData(items);
     const options = createTimeLineOpts({locale: lng});
-    timeline.setOptions(options);
+    const timeline = new Timeline(container.current, timelineItems, groups, options);
     setTimeLine(timeline);
   };
 

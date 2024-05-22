@@ -1,3 +1,4 @@
+import {TimeLineVO} from '@/components/timeline/timeline.type';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import {TimelineOptions} from 'vis-timeline';
@@ -21,4 +22,15 @@ export const createTimeLineOpts = (input: TimelineOptions): TimelineOptions => {
     height: 400,
     ...input,
   };
+};
+
+export const createTimeLineGroup = (group: TimeLineVO[]) => {
+  const groups = group.map(({id, content}) => ({id, content}));
+  const items = [];
+  for (const {itemList} of group) {
+    for (const v of itemList) {
+      items.push(v);
+    }
+  }
+  return {groups, items};
 };
