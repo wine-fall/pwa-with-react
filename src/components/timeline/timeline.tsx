@@ -27,12 +27,12 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
     if (!container.current) {
       return;
     }
-    console.log('mockGroup is', mockGroup);
     const {groups, items} = createTimeLineGroup(mockGroup);
     const timelineItems = new DataSet(items); // todo: get the server data
     setData(items);
     const options = createTimeLineOpts({locale: lng});
     const timeline = new Timeline(container.current, timelineItems, groups, options);
+    window.timeline = timeline; // todo: only call this in DEV mode
     setTimeLine(timeline);
   };
 

@@ -6,7 +6,7 @@ import {TimelineOptions} from 'vis-timeline';
 dayjs.extend(duration);
 
 export const twentyHundredYears = dayjs.duration({years: 200}).asMilliseconds();
-export const oneWeek = dayjs.duration({weeks: 1}).asMilliseconds();
+export const threeMonth = dayjs.duration({months: 3}).asMilliseconds();
 
 export const createTimeLineOpts = (input: TimelineOptions): TimelineOptions => {
   return {
@@ -18,7 +18,7 @@ export const createTimeLineOpts = (input: TimelineOptions): TimelineOptions => {
     },
     zoomFriction: 5,
     zoomMax: twentyHundredYears,
-    zoomMin: oneWeek,
+    zoomMin: threeMonth,
     groupHeightMode: 'fixed', // group 定高
     height: 400,
     orientation: {
