@@ -2,29 +2,28 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import {Suspense} from 'react';
 
-import {CircularProgress, Box, StyledEngineProvider} from '@mui/material';
+import {CircularProgress, Box} from '@mui/material';
 
 import './index.css';
 import './i18.ts';
+import {MuiWrapper} from '@/components';
 
 export default function CircularIndeterminate() {
   return (
     <Box sx={{
       display: 'flex',
       justifyContent: 'center',
-      height: '100vh'
+      marginTop: '200px'
     }}>
-      <CircularProgress sx={{
-        marginTop: '400px'
-      }} />
+      <CircularProgress />
     </Box>
   );
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <StyledEngineProvider>
+  <MuiWrapper>
     <Suspense fallback={<CircularIndeterminate />}>
       <App />
     </Suspense>
-  </StyledEngineProvider>,
+  </MuiWrapper>,
 );
