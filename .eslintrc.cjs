@@ -27,7 +27,12 @@ module.exports = {
           maximum: 2,
           when: 'always',
       },
-  ]
+    ],
+    "@typescript-eslint/no-misused-promises": [2, {
+      "checksVoidReturn": {
+        "attributes": false
+      }
+    }]
   },
   parserOptions: {
     ecmaVersion: 'latest',
