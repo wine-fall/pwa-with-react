@@ -1,6 +1,6 @@
 import {PalaisTimeLine} from '@/components';
-import {Box, Button} from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+import {Box} from '@mui/material';
+import FormDialog from '@/components/form_dialog/form_dialog';
 
 const Home = () => {
   return (
@@ -9,9 +9,7 @@ const Home = () => {
     }}>
       
       <PalaisTimeLine />
-      <Button variant="contained" endIcon={<SendIcon />}>
-        Send
-      </Button>
+      <FormDialog />
     </Box>
   );
 };
