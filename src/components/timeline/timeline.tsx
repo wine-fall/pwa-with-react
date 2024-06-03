@@ -61,7 +61,7 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
     <>
       <p>{t('hello_timeline')}</p>
       <p>{t('hello_palais')}</p>
-      <div ref={container}></div>
+      <div className={'h-4/6'} ref={container}></div>
     </>
   );
 };

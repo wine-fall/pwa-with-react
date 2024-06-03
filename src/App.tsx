@@ -1,32 +1,29 @@
+import {Box, CircularProgress} from '@mui/material';
+import {Suspense} from 'react';
+
 import './App.css';
-import {PalaisTimeLine} from '@/components';
-import {LanguagesOptsType} from '@/types';
-import {useTranslation} from 'react-i18next';
+import {RouterProvider} from 'react-router-dom';
+import {router} from '@/router';
 
-import {LanguageMap} from '@/constant';
-
-const Languages: LanguagesOptsType = {
-  [LanguageMap.EN]: {name: 'English'},
-  [LanguageMap.ZH]: {name: '中文'}
+export const CircularIndeterminate = () => {
+  return (
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '200px'
+    }}>
+      <CircularProgress />
+    </Box>
+  );
 };
 
+
+
 function App() {
-  const {i18n} = useTranslation();
   return (
-    <div>
-      {Object.keys(Languages).map(lng => {
-        return <button
-          type='submit'
-          key={lng}
-          onClick={() => {
-            i18n.changeLanguage(lng).catch((err) => {
-              console.error('i18n.changeLanguage error is', err);
-            });
-          }}
-        >{Languages[lng].name}</button>;
-      })}
-      <PalaisTimeLine />
-    </div>
+    <Suspense fallback={<CircularIndeterminate />}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
 

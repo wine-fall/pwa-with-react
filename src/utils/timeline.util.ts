@@ -20,7 +20,7 @@ export const createTimeLineOpts = (input: TimelineOptions): TimelineOptions => {
     zoomMax: twentyHundredYears,
     zoomMin: threeMonth,
     groupHeightMode: 'fixed', // group 定高
-    height: 400,
+    height: '100%',
     orientation: {
       axis: 'both',
       item: 'top', // 时间轴初始定位在顶部
