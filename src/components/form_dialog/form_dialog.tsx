@@ -7,7 +7,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {FormDialogProps} from './form_dialog.type';
 
-const FormDialog = <F extends FieldValues,>({defaultValues, fileds}: FormDialogProps<F>) => {
+const FormDialog = <F extends FieldValues,>({
+  defaultValues,
+  fileds,
+  buttonContent,
+  dialogTitle,
+  confirmTxt,
+  cancelTxt
+}: FormDialogProps<F>) => {
   const {control, handleSubmit} = useForm<F>({
     defaultValues,
   });
@@ -28,7 +35,7 @@ const FormDialog = <F extends FieldValues,>({defaultValues, fileds}: FormDialogP
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+        {buttonContent}
       </Button>
       <Dialog
         open={open}
@@ -38,9 +45,9 @@ const FormDialog = <F extends FieldValues,>({defaultValues, fileds}: FormDialogP
           onSubmit: handleSubmit(onSubmit),
         }}
       >
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
-          {fileds.map(({name, render}) => (
+          {fileds.map(({name, render}, idx) => (
             <div
               key={name}
             >
@@ -50,13 +57,13 @@ const FormDialog = <F extends FieldValues,>({defaultValues, fileds}: FormDialogP
                 control={control}
               />
               <br />
-              <br />
+              {idx === fileds.length - 1 ? null : <br />}
             </div>
           ))}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
+          <Button onClick={handleClose}>{cancelTxt || 'Cancel'}</Button>
+          <Button type="submit">{confirmTxt || 'Subscribe'}</Button>
         </DialogActions>
       </Dialog>
     </>
