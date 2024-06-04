@@ -4,10 +4,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import {FieldValues, SubmitHandler, useForm} from 'react-hook-form';
+import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {FormDialogProps} from './form_dialog.type';
 
-const FormDialog = <F extends FieldValues,>({defaultValues}: FormDialogProps<F>) => {
+const FormDialog = <F extends FieldValues,>({defaultValues, fileds}: FormDialogProps<F>) => {
   const {control, handleSubmit} = useForm<F>({
     defaultValues,
   });
@@ -35,44 +35,24 @@ const FormDialog = <F extends FieldValues,>({defaultValues}: FormDialogProps<F>)
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: handleSubmit,
+          onSubmit: handleSubmit(onSubmit),
         }}
       >
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {/* <Controller
-              name="firstName"
-              control={control}
-              render={({field}) => (
-                <TextField
-                  autoFocus
-                  required
-                  margin="dense"
-                  label="Email Address"
-                  type="email"
-                  fullWidth
-                  variant="standard"
-                  {...field}
-                />
-              )}
-            />
-            <Controller
-              name="iceCreamType"
-              control={control}
-              render={({field}) => (
-                <Select
-                  {...field}
-                  options={[
-                    {value: "chocolate", label: "Chocolate"},
-                    {value: "strawberry", label: "Strawberry"},
-                    {value: "vanilla", label: "Vanilla"},
-                  ]}
-                />
-              )}
-            /> */}
-            <input type="submit" />
-          </form>
+          {fileds.map(({name, render}) => (
+            <div
+              key={name}
+            >
+              <Controller
+                name={name}
+                render={render}
+                control={control}
+              />
+              <br />
+              <br />
+            </div>
+          ))}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

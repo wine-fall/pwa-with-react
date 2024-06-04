@@ -1,6 +1,8 @@
 import {PalaisTimeLine} from '@/components';
 import {Box} from '@mui/material';
 import FormDialog from '@/components/form_dialog/form_dialog';
+import {EventFormValues} from './home.type';
+import {eventDefalutFormValues, eventFormFields} from '@/constant/home.constant';
 
 const Home = () => {
   return (
@@ -9,7 +11,10 @@ const Home = () => {
     }}>
       
       <PalaisTimeLine />
-      <FormDialog />
+      <FormDialog<EventFormValues>
+        defaultValues={eventDefalutFormValues} 
+        fileds={eventFormFields} 
+      />
     </Box>
   );
 };
