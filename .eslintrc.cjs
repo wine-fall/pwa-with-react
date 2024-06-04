@@ -28,11 +28,24 @@ module.exports = {
           when: 'always',
       },
     ],
-    "@typescript-eslint/no-misused-promises": [2, {
-      "checksVoidReturn": {
-        "attributes": false
+    '@typescript-eslint/no-misused-promises': [2, {
+      'checksVoidReturn': {
+        'attributes': false
       }
-    }]
+    }],
+    'eol-last': ['error', 'always'],
+    'react/jsx-wrap-multilines': [
+      'error',
+      {
+          declaration: 'parens-new-line',
+          assignment: 'parens-new-line',
+          return: 'parens-new-line',
+          arrow: 'parens-new-line',
+          condition: 'parens-new-line',
+          logical: 'parens-new-line',
+          prop: 'parens-new-line',
+      },
+  ],
   },
   parserOptions: {
     ecmaVersion: 'latest',
