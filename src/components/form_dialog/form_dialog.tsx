@@ -15,7 +15,11 @@ const FormDialog = <F extends FieldValues,>({
   confirmTxt,
   cancelTxt
 }: FormDialogProps<F>) => {
-  const {control, handleSubmit} = useForm<F>({
+  const {
+    control,
+    handleSubmit,
+    formState: {errors}
+  } = useForm<F>({
     defaultValues,
   });
   const [open, setOpen] = React.useState(false);
@@ -47,14 +51,15 @@ const FormDialog = <F extends FieldValues,>({
       >
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
-          {fileds.map(({name, render}, idx) => (
+          {fileds.map(({name, renderWrapper, rules}, idx) => (
             <div
               key={name}
             >
               <Controller
                 name={name}
-                render={render}
+                render={renderWrapper(errors)}
                 control={control}
+                rules={rules}
               />
               <br />
               {idx === fileds.length - 1 ? null : <br />}
