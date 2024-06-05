@@ -27,8 +27,7 @@
     "react-hook-form": "^7.51.5",
     "react-i18next": "^14.1.1",
     "react-router-dom": "^6.23.1",
-    "vis-timeline": "^7.7.3",
-    "yup": "^1.4.0"
+    "vis-timeline": "^7.7.3"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
