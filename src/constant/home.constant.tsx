@@ -24,6 +24,7 @@ export const eventFormFields: FormFieldItem<EventFormValues>[] = [
         type={'text'}
         variant="standard"
         fullWidth
+        error={!!errors.title}
         helperText={errors.title?.message || ''}
         {...field}
       />
@@ -36,12 +37,16 @@ export const eventFormFields: FormFieldItem<EventFormValues>[] = [
     name: 'start',
     renderWrapper: (errors) => ({field}) => (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker label="Start Time" {...field}
+        <DatePicker
+          label="Start Time"
           slotProps={{
             textField: {
               helperText: errors.start?.message || '',
+              error: !!errors.start,
+              fullWidth: true,
             },
           }}
+          {...field}
         />
       </LocalizationProvider>
     ),
@@ -62,6 +67,8 @@ export const eventFormFields: FormFieldItem<EventFormValues>[] = [
           slotProps={{
             textField: {
               helperText: errors.end?.message || '',
+              error: !!errors.end,
+              fullWidth: true,
             },
           }}
         />
