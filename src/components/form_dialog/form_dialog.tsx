@@ -18,6 +18,7 @@ const FormDialog = <F extends FieldValues,>({
   const {
     control,
     handleSubmit,
+    reset,
     formState: {errors}
   } = useForm<F>({
     defaultValues,
@@ -25,6 +26,7 @@ const FormDialog = <F extends FieldValues,>({
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    reset();
     setOpen(true);
   };
 
@@ -47,6 +49,9 @@ const FormDialog = <F extends FieldValues,>({
         PaperProps={{
           component: 'form',
           onSubmit: handleSubmit(onSubmit),
+          sx:{
+            width: '311px'
+          }
         }}
       >
         <DialogTitle>{dialogTitle}</DialogTitle>
