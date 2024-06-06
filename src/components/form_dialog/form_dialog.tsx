@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {FormDialogProps} from './form_dialog.type';
+import {Box} from '@mui/material';
 
 const FormDialog = <F extends FieldValues,>({
   defaultValues,
@@ -57,7 +58,7 @@ const FormDialog = <F extends FieldValues,>({
         <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
           {fileds.map(({name, renderWrapper, rules}, idx) => (
-            <div
+            <Box
               key={name}
             >
               <Controller
@@ -68,7 +69,7 @@ const FormDialog = <F extends FieldValues,>({
               />
               <br />
               {idx === fileds.length - 1 ? null : <br />}
-            </div>
+            </Box>
           ))}
         </DialogContent>
         <DialogActions>

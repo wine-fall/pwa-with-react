@@ -8,7 +8,7 @@ i18next
   .use(LanguageDetector)
   .use(Backend)
   .init({
-    debug: true,
+    debug: import.meta.env.DEV,
     fallbackLng: 'en',
     saveMissing: true,
     backend: {

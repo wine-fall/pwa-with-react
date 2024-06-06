@@ -32,7 +32,9 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
     setData(items);
     const options = createTimeLineOpts({locale: lng});
     const timeline = new Timeline(container.current, timelineItems, groups, options);
-    window.timeline = timeline; // todo: only call this in DEV mode
+    if (import.meta.env.DEV) {
+      window.timeline = timeline;
+    }
     setTimeLine(timeline);
   };
 
