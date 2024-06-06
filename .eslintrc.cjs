@@ -45,7 +45,31 @@ module.exports = {
           logical: 'parens-new-line',
           prop: 'parens-new-line',
       },
-  ],
+    ],
+    'semi-spacing': ['error'],
+    'keyword-spacing': ['error'],
+    'comma-spacing': ['error'],
+    'key-spacing': ['error', {beforeColon: false, afterColon: true}],
+    'object-curly-spacing': ['error', 'never'],
+    'arrow-spacing': ['error'],
+    'array-bracket-spacing': ['error', 'never'],
+    'computed-property-spacing': ['error', 'never'],
+    'func-call-spacing': ['error', 'never'],
+    'switch-colon-spacing': ['error'],
+    'space-before-function-paren': [
+        'error',
+        {anonymous: 'always', named: 'never'},
+    ],
+    'space-infix-ops': ['error'],
+    'space-unary-ops': [
+      2, {
+          'words': true,
+          'nonwords': false,
+          'overrides': {
+              'new': false,
+          }
+      }
+    ]
   },
   parserOptions: {
     ecmaVersion: 'latest',
