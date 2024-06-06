@@ -5,6 +5,8 @@ import type {TimeLineProps, TimeLineProperty, TimeLineData} from './timeline.typ
 import {useTimeLineListener} from '@/hooks';
 import {useTranslation} from 'react-i18next';
 import {createTimeLineGroup, createTimeLineOpts} from '@/utils';
+import {PostDialog} from '@/components';
+import type {PostDialogRef} from '@/components/post_dialog/post_dialog.type';
 
 const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
   const container = useRef<HTMLDivElement>(null);
@@ -12,6 +14,8 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
   const [data, setData] = useState<TimeLineData[]>([]);
 
   const {t} = useTranslation();
+
+  const postDialogRef = useRef<PostDialogRef>(null);
 
   useEffect(() => {
     if (!container.current) {
@@ -41,9 +45,13 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
 
   const handleSelect = (properties: TimeLineProperty) => {
     const {items} = properties;
+    if (items.length === 0) {
+      return;
+    }
     const selectId = items[0];
     const selectItem = data.find(v => v.id === selectId);
     console.log('select properties is', selectItem); // todo: get the server data
+    postDialogRef.current?.open();
   };
 
   const handleRangeChanged = (properties: TimeLineProperty) => {
@@ -64,6 +72,7 @@ const TimeLine: React.FC<TimeLineProps> = ({lng = 'zh-cn'}) => {
       <p>{t('hello_timeline')}</p>
       <p>{t('hello_palais')}</p>
       <div className={'h-4/6'} ref={container}></div>
+      <PostDialog ref={postDialogRef}/>
     </>
   );
 };
