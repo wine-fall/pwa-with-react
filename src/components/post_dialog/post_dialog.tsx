@@ -1,9 +1,11 @@
-import {Dialog, IconButton} from '@mui/material';
+import {Box, Dialog, DialogContent, IconButton, Toolbar} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import {forwardRef, useImperativeHandle, useState} from 'react';
 import {PostDialogRef} from './post_dialog.type';
 import {FixedSizeList} from 'react-window';
 import type {ListChildComponentProps} from 'react-window';
+import {PostCard} from '@/components';
+import AutoSizer from 'react-virtualized-auto-sizer';
 
 const PostDialog: ReturnType<typeof forwardRef<PostDialogRef>> = forwardRef<PostDialogRef>(function PostDialogWithRef(_props, ref) {
   const [open, setOpen] = useState<boolean>(true);
@@ -22,38 +24,44 @@ const PostDialog: ReturnType<typeof forwardRef<PostDialogRef>> = forwardRef<Post
     };
   }, [open]);
 
-  const renderRow = (props: ListChildComponentProps) => {
-    console.log(props); // todo
-    return <div></div>;
+  const renderRow = (listProps: ListChildComponentProps) => {
+    const {index, style} = listProps;
+    return <PostCard key={index} style={style} />;
   };
   
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      fullScreen
-    >
-      <IconButton
-        aria-label="close"
-        onClick={handleClose}
-        sx={{
-          position: 'absolute',
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500],
-        }}
-      >
-        <CloseIcon />
-      </IconButton>
-      <FixedSizeList
-        height={400}
-        width={360}
-        itemSize={46}
-        itemCount={200}
-        overscanCount={5}
-      >
-        {renderRow}
-      </FixedSizeList>
+    <Dialog open={open} fullScreen>
+      <Toolbar>
+        <Box sx={{flex: 1}}></Box>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          edge='end'
+        >
+          <CloseIcon />
+        </IconButton>
+      </Toolbar>
+      <DialogContent sx={{pt: 0}}>
+        <Box
+          sx={{
+            height: 'calc(100vh - 20px - 20px - 56px)',
+          }}
+        >
+          <AutoSizer>
+            {({height, width}) => (
+              <FixedSizeList
+                className="List"
+                height={height}
+                itemCount={1000}
+                itemSize={319 + 56}
+                width={width}
+              >
+                {renderRow}
+              </FixedSizeList>
+            )}
+          </AutoSizer>
+        </Box>
+      </DialogContent>
     </Dialog>
   );
 });

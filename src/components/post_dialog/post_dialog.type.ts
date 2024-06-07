@@ -1,3 +1,11 @@
 export interface PostDialogRef {
-  open: () => void
+  open: () => void;
+}
+
+export interface PostItem {
+
+}
+
+export interface PostDialogProps {
+  postList: PostItem[]
 }
