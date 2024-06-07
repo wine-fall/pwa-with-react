@@ -1,3 +1,5 @@
+import {like, dislike} from './src/style';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -6,7 +8,16 @@ export default {
   ],
   important: "#root",
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        like,
+        dislike,
+      },
+      animation: {
+        like: 'like 0.5s',
+        dislike: 'dislike 0.5s',
+      },
+    },
   },
   plugins: [],
 }
