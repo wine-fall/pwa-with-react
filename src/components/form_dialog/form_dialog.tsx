@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useImperativeHandle} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,13 +8,13 @@ import {Controller, FieldValues, SubmitHandler, useForm} from 'react-hook-form';
 import {FormDialogProps} from './form_dialog.type';
 import {Box} from '@mui/material';
 
-const FormDialog = <F extends FieldValues,>({
+const FormDialog = <F extends FieldValues, >({
   defaultValues,
   fileds,
-  buttonContent,
   dialogTitle,
   confirmTxt,
-  cancelTxt
+  cancelTxt,
+  _ref
 }: FormDialogProps<F>) => {
   const {
     control,
@@ -26,11 +26,6 @@ const FormDialog = <F extends FieldValues,>({
   });
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    reset();
-    setOpen(true);
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -39,45 +34,50 @@ const FormDialog = <F extends FieldValues,>({
     console.log('data submitted: ', data);
   };
 
+  useImperativeHandle(_ref, () => {
+    return {
+      onOpen: (cb) => {
+        cb && cb();
+        reset();
+        setOpen(true);
+      }
+    };
+  }, []);
+
   return (
-    <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        {buttonContent}
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: handleSubmit(onSubmit),
-          sx:{
-            width: '311px'
-          }
-        }}
-      >
-        <DialogTitle>{dialogTitle}</DialogTitle>
-        <DialogContent>
-          {fileds.map(({name, renderWrapper, rules}, idx) => (
-            <Box
-              key={name}
-            >
-              <Controller
-                name={name}
-                render={renderWrapper(errors)}
-                control={control}
-                rules={rules}
-              />
-              <br />
-              {idx === fileds.length - 1 ? null : <br />}
-            </Box>
-          ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>{cancelTxt || 'Cancel'}</Button>
-          <Button type="submit">{confirmTxt || 'Subscribe'}</Button>
-        </DialogActions>
-      </Dialog>
-    </>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      PaperProps={{
+        component: 'form',
+        onSubmit: handleSubmit(onSubmit),
+        sx: {
+          width: '311px'
+        }
+      }}
+    >
+      <DialogTitle>{dialogTitle}</DialogTitle>
+      <DialogContent>
+        {fileds.map(({name, renderWrapper, rules}, idx) => (
+          <Box
+            key={name}
+          >
+            <Controller
+              name={name}
+              render={renderWrapper(errors)}
+              control={control}
+              rules={rules}
+            />
+            <br />
+            {idx === fileds.length - 1 ? null : <br />}
+          </Box>
+        ))}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>{cancelTxt || 'Cancel'}</Button>
+        <Button type="submit">{confirmTxt || 'Subscribe'}</Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

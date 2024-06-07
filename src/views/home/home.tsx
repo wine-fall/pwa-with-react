@@ -1,4 +1,4 @@
-import {FormDialog, PalaisTimeLine} from '@/components';
+import {FormDialogBtn, PalaisTimeLine} from '@/components';
 import {Box} from '@mui/material';
 import {EventFormValues} from './home.type';
 import {eventDefalutFormValues, eventFormFields} from '@/constant/home.constant';
@@ -13,7 +13,7 @@ const Home = () => {
     }}>
       
       <PalaisTimeLine />
-      <FormDialog<EventFormValues>
+      <FormDialogBtn<EventFormValues>
         buttonContent={t('event_btn_content', 'add event')}
         dialogTitle={t('event_dialog_title', 'Create A Event')}
         defaultValues={eventDefalutFormValues} 
