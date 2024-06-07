@@ -1,12 +1,14 @@
 import React from 'react';
-import {CssBaseline, StyledEngineProvider} from '@mui/material';
-
+import {CssBaseline, StyledEngineProvider, ThemeProvider} from '@mui/material';
+import theme from './theme';
 
 export const MuiWrapper: React.FC<{children: React.ReactNode}> = ({children}) => {
   return (
     <StyledEngineProvider injectFirst>
-      <CssBaseline />
-      {children}
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
     </StyledEngineProvider>
   );
 };
