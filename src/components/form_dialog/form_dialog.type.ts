@@ -1,4 +1,5 @@
-import {Ref} from 'react';
+import {DialogProps} from '@mui/material';
+import React, {Ref, RefObject} from 'react';
 import {ControllerProps, DefaultValues, FieldErrors, FieldValues} from "react-hook-form";
 
 export type FormFieldItem<F extends FieldValues> = Omit<ControllerProps<F>, 'render'> & {
@@ -16,8 +17,10 @@ export interface FormDialogProps<F extends FieldValues> {
   _ref: Ref<FormDialogRef>;
   confirmTxt?: string;
   cancelTxt?: string;
+  dialogProps?: Partial<DialogProps>
 }
 
 export interface FormDialogBtnProps<F extends FieldValues> extends Omit<FormDialogProps<F>, '_ref'> {
-  buttonContent: string;
+  buttonContent?: string;
+  renderBtn?: (FormDialogRef: RefObject<FormDialogRef>) => React.ReactNode
 }

@@ -4,7 +4,7 @@ import {FieldValues} from 'react-hook-form';
 import FormDialog from './form_dialog';
 import {useRef} from 'react';
 
-const FormDialogBtn = <F extends FieldValues, >({buttonContent, ...rest}: FormDialogBtnProps<F>) => {
+const FormDialogBtn = <F extends FieldValues, >({buttonContent, renderBtn, ...rest}: FormDialogBtnProps<F>) => {
   
   const formDialogRef = useRef<FormDialogRef>(null);
 
@@ -14,9 +14,13 @@ const FormDialogBtn = <F extends FieldValues, >({buttonContent, ...rest}: FormDi
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        {buttonContent}
-      </Button>
+      {renderBtn
+        ? renderBtn(formDialogRef)
+        : (
+          <Button variant="outlined" onClick={handleClickOpen}>
+            {buttonContent}
+          </Button>
+        )}
       <FormDialog
         {...rest}
         _ref={formDialogRef}

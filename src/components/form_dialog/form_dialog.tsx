@@ -14,7 +14,8 @@ const FormDialog = <F extends FieldValues, >({
   dialogTitle,
   confirmTxt,
   cancelTxt,
-  _ref
+  _ref,
+  dialogProps
 }: FormDialogProps<F>) => {
   const {
     control,
@@ -55,6 +56,7 @@ const FormDialog = <F extends FieldValues, >({
           width: '311px'
         }
       }}
+      {...dialogProps}
     >
       <DialogTitle>{dialogTitle}</DialogTitle>
       <DialogContent>
