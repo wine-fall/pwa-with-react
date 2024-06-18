@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <Box sx={{
-      height: 'calc(100vh - 4rem)',
+      height: 'calc(100vh - 4rem - 24px)',
     }}>
       
       <PalaisTimeLine />

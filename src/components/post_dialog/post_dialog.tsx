@@ -73,54 +73,51 @@ const PostDialog: ReturnType<typeof forwardRef<PostDialogRef>> = forwardRef<Post
   };
   
   return (
-    <>
-      <Dialog open={open} fullScreen>
-        <Toolbar>
-          <Box sx={{flex: 1}}></Box>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            edge='end'
-          >
-            <CloseIcon />
-          </IconButton>
-        </Toolbar>
-        <DialogContent sx={{pt: 0}}>
-          <Box
-            sx={{
-              height: 'calc(100vh - 20px - 20px - 56px)',
-            }}
-          >
-            <AutoSizer>
-              {({height, width}) => (
-                <FixedSizeList
-                  className="List"
-                  height={height}
-                  itemCount={1000}
-                  itemSize={319 + 56}
-                  width={width}
-                >
-                  {renderRow}
-                </FixedSizeList>
-              )}
-            </AutoSizer>
-          </Box>
-        </DialogContent>
-        <FormDialogBtn<PostFormValues>
-          defaultValues={postDefalutFormValues}
-          fileds={postFormFields}
-          dialogTitle={t('post_dialog_title', 'Post One!')}
-          renderBtn={onRenderBtn}
-          confirmTxt={'post'}
-          dialogProps={{
-            fullScreen: true,
-            TransitionComponent: Transition
+    <Dialog open={open} fullScreen>
+      <Toolbar>
+        <Box sx={{flex: 1}}></Box>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          edge='end'
+        >
+          <CloseIcon />
+        </IconButton>
+      </Toolbar>
+      <DialogContent sx={{pt: 0}}>
+        <Box
+          sx={{
+            height: 'calc(100vh - 20px - 20px - 56px)',
           }}
         >
-        </FormDialogBtn>
-      </Dialog>
-      
-    </>
+          <AutoSizer>
+            {({height, width}) => (
+              <FixedSizeList
+                className="List"
+                height={height}
+                itemCount={10}
+                itemSize={319 + 56}
+                width={width}
+              >
+                {renderRow}
+              </FixedSizeList>
+            )}
+          </AutoSizer>
+        </Box>
+      </DialogContent>
+      <FormDialogBtn<PostFormValues>
+        defaultValues={postDefalutFormValues}
+        fileds={postFormFields}
+        dialogTitle={t('post_dialog_title', 'Post One!')}
+        renderBtn={onRenderBtn}
+        confirmTxt={'post'}
+        dialogProps={{
+          fullScreen: true,
+          TransitionComponent: Transition
+        }}
+      >
+      </FormDialogBtn>
+    </Dialog>
   );
 });
 

@@ -12,5 +12,5 @@ export interface PostDialogProps {
 
 export interface PostFormValues {
   content: string;
-  image?: string[];
+  imageList?: string[];
 }

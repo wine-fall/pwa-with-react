@@ -4,3 +4,6 @@ export {default as FormDialog} from './form_dialog/form_dialog';
 export {default as FormDialogBtn} from './form_dialog/form_dialog_btn';
 export {default as PostDialog} from './post_dialog/post_dialog';
 export {default as PostCard} from './post_card/post_card';
+export {default as Carousel} from './carousel/carousel';
+export {default as CarouselDialog} from './carousel/carousel_dialog';
+export {default as ImageUploader} from './image_uploader/image_uploader';

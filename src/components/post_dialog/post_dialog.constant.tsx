@@ -1,10 +1,11 @@
 import {FormFieldItem} from '@/components/form_dialog/form_dialog.type';
 import {TextField} from '@mui/material';
 import {PostFormValues} from './post_dialog.type';
+import ImageUploader from '@/components/image_uploader/image_uploader';
 
 export const postDefalutFormValues: PostFormValues = {
   content: '',
-  image: [],
+  imageList: [],
 };
 
 export const postFormFields: FormFieldItem<PostFormValues>[] = [
@@ -16,6 +17,8 @@ export const postFormFields: FormFieldItem<PostFormValues>[] = [
         margin="dense"
         label="Content"
         type={'text'}
+        rows={8}
+        multiline
         variant="standard"
         fullWidth
         error={!!errors.content}
@@ -23,5 +26,11 @@ export const postFormFields: FormFieldItem<PostFormValues>[] = [
         {...field}
       />
     ),
+  },
+  {
+    name: 'imageList',
+    renderWrapper: () => () => (
+      <ImageUploader />
+    )
   }
 ];
