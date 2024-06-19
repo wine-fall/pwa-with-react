@@ -1,9 +1,10 @@
 import {Grid, IconButton, styled} from '@mui/material';
-import {ChangeEvent, FC, useState} from 'react';
+import {ChangeEvent, FC, useRef, useState} from 'react';
 import {ImageUploaderProps} from './image_uploader.type';
-import {ImageItem} from '../carousel/carousel.type';
+import {CarouselDialogRef, ImageItem} from '@/components/carousel/carousel.type';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CloseIcon from '@mui/icons-material/Close';
+import CarouselDialog from '@/components/carousel/carousel_dialog';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -18,6 +19,8 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 const ImageUploader: FC<ImageUploaderProps> = () => {
+  const carouselRef = useRef<CarouselDialogRef>(null);
+
   const [imageList, setImageList] = useState<ImageItem []>([{
     label: 'husky',
     imgPath: 'https://www.dogster.com/wp-content/uploads/2024/01/siberian-husky-dog-standing-on-grass_Edalin-Photograhy_Shutterstock.jpeg.webp'
@@ -38,13 +41,18 @@ const ImageUploader: FC<ImageUploaderProps> = () => {
     setImageList(imageList.filter((v) => v.imgPath !== item.imgPath));
   };
 
+  const handleClickImage = (step: number) => () => {
+    carouselRef.current?.open(step);
+  };
+
   return (
     <>
       <Grid container spacing={1}>
-        {imageList.map((item) => (
+        {imageList.map((item, idx) => (
           <Grid item key={item.imgPath}
             xs={4} sx={{position: 'relative'}}>
             <img
+              onClick={handleClickImage(idx)}
               src={`${item.imgPath}`}
               loading="lazy"
               className='h-20 w-full object-cover'
@@ -69,6 +77,7 @@ const ImageUploader: FC<ImageUploaderProps> = () => {
           </Grid>
         )}
       </Grid>
+      <CarouselDialog ref={carouselRef} imageList={imageList} />
     </>
   );
 };
