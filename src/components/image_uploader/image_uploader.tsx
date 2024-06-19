@@ -1,8 +1,9 @@
-import {Grid, IconButton, ImageList, ImageListItem, styled} from '@mui/material';
-import {ChangeEvent, FC, useMemo, useState} from 'react';
+import {Grid, IconButton, styled} from '@mui/material';
+import {ChangeEvent, FC, useState} from 'react';
 import {ImageUploaderProps} from './image_uploader.type';
 import {ImageItem} from '../carousel/carousel.type';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import CloseIcon from '@mui/icons-material/Close';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -15,8 +16,6 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-
-const RowHeight = 90;
 
 const ImageUploader: FC<ImageUploaderProps> = () => {
   const [imageList, setImageList] = useState<ImageItem []>([{
@@ -35,27 +34,27 @@ const ImageUploader: FC<ImageUploaderProps> = () => {
     event.target.value = ''; 
   };
 
-  const ImageListHeight = useMemo(() => {
-    if (imageList.length < 3) {
-      return RowHeight;
-    } else if (imageList.length < 6) {
-      return RowHeight * 2;
-    } else {
-      return RowHeight * 3;
-    }
-  }, [imageList.length]);
+  const handleDeleteImage = (item: ImageItem) => () => {
+    setImageList(imageList.filter((v) => v.imgPath !== item.imgPath));
+  };
 
   return (
     <>
       <Grid container spacing={1}>
         {imageList.map((item) => (
           <Grid item key={item.imgPath}
-            xs={4}>
+            xs={4} sx={{position: 'relative'}}>
             <img
               src={`${item.imgPath}`}
               loading="lazy"
               className='h-20 w-full object-cover'
             />
+            <IconButton
+              className='border border-gray-500 absolute top-0 -right-1 border-solid bg-white w-5 h-5'
+              onClick={handleDeleteImage(item)}
+            >
+              <CloseIcon sx={{fontSize: '16px'}} />
+            </IconButton>
           </Grid>
         ))}
         {imageList.length < 9 && (
